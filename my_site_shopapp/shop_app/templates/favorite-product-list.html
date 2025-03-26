@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{% static 'css/cart-product-list.css' %}">
+</head>
+<body>
+    <main>
+        <h1>Ваша корзина</h1>
+
+        {% if products %}
+            <div class="products-grid">
+                {% for product in products %}
+                    <div class="product-block">
+                        <a href="{% url 'shop_app:product_detail' pk=product.pk %}">
+                            <p>{{ product.name }}</p>
+                        </a>
+                        <p>{{ product.description|truncatechars:100 }}</p>
+                        <p>{{ product.price }} ₽</p>
+                        <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                            Добавить в корзину
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <p>Ваша корзина пуста</p>
+            </div>
+        {% endif %}
+    </main>
+    <script src="{% static 'js/products-to-favorite.js' %}"></script>
+</body>
+</html>

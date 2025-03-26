@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% translate 'Авторизация' %}</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>{% translate 'Авторизация' %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% translate 'Войти' %}</button>
+        </form>
+        <a href="{% url 'auth_app:signup' %}">{% translate 'Зарегистрироваться' %}</a>
+    </div>
+</body>
+</html>

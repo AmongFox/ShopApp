@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование товара: </title>
+    <link rel="stylesheet" href="{% static 'css/product-update.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Редактирование товара</h1>
+    <form class="product-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="id-name">Название товара:</label>
+        <input type="text" id="id-name" name="name" value="{{ form.name.value|default:'' }}" required>
+
+        {% if form.name.errors %}
+            <div class="error-table">
+                <ul>
+                    {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <label for="id-description">Описание товара:</label>
+        <textarea class="resizable-textarea" id="id-description" name="description"  rows="4" required>{{ form.description.value|default:'' }}</textarea>
+
+        {% if form.description.errors %}
+            <div class="error-table">
+                <ul>
+                    {% for error in form.description.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <label for="id-price">Цена товара:</label>
+        <input type="number" id="id-price" name="price" value="{{ form.price.value|default:'' }}" step="1" required>
+
+        {% if form.price.errors %}
+            <div class="error-table">
+                <ul>
+                    {% for error in form.price.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <label for="id-discount">Скидка:</label>
+        <input type="number" id="id-discount" name="discount" value="{{ form.discount.value|default:0 }}" step="1" min="0" max="100">
+
+        {% if form.discount.errors %}
+        <div class="error-table">
+            <ul>
+                {% for error in form.discount.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <label for="id-quantity">Количество товара:</label>
+        <input type="number" id="id-quantity" name="quantity" value="{{ form.quantity.value|default:0 }}" step="1" min="1">
+
+        {% if form.quantity.errors %}
+        <div class="error-table">
+            <ul>
+                {% for error in form.quantity.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <label for="id-archived">Архив:</label>
+        <input type="checkbox" id="id-archived" name="archived">
+
+        <label for="id-preview">Изображение товара:</label>
+        <input type="file" id="id-preview" name="preview" accept="image/*" required>
+
+        {% if form.preview.errors %}
+            <div class="error-table">
+                <ul>
+                    {% for error in form.preview.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <button type="submit">Изменить товар</button>
+    </form>
+    <p><a href="{% url 'shop_app:product_list' %}">Вернуться к списку товаров</a></p>
+</div>
+</body>
+</html>

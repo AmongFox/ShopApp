@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин товаров</title>
+    <link rel="stylesheet" href="{% static 'css/product-list.css' %}">
+</head>
+<body>
+<form method="get">
+    <header>
+        <div class="menu">
+            <details>
+                <summary>Меню</summary>
+                <ul class="table-menu">
+                    <li>
+                        Аккаунт
+                    </li>
+                    <li>
+                        Корзина
+                    </li>
+                    <li>
+                        Каталог
+                    </li>
+                </ul>
+            </details>
+        </div>
+        <div class="for-users">
+            <div>
+                <a href="https://">Акции</a>
+            </div>
+            <div>
+                <a href="https://">Поддержка</a>
+            </div>
+            <div>
+                <a href="https://">Доставка</a>
+            </div>
+            <div>
+                <details>
+                    <summary>Для покупателей</summary>
+                </details>
+            </div>
+            <div>
+                <a href="https://">Юридическим лицам</a>
+            </div>
+            <div>
+                <a href="https://">Контакты</a>
+            </div>
+            <div>
+                <a href="https://">Мы в телеграмме</a>
+            </div>
+        </div>
+        <div class="number-phone">
+            8-904-867-86-46
+        </div>
+    </header>
+    <nav class="navbar">
+        <div>
+            <button class=button-redirect">
+                <a href="{% url 'shop_app:shop_main_page' %}">Вернуться на главную</a>
+            </button>
+        </div>
+        <div class="search-field">
+                {{ form.name }}
+                <button type="submit">
+                    <img src="{% static 'img/search-button.png' %}" alt="Иконка" class="search-button-icon">
+                </button>
+        </div>
+        <div class="user-profile-field">
+            {% if my_user %}
+                {% if profile.avatar %}
+                    <div class="user-profile-avatar">
+                        <a href="{% url 'profiles_app:profiles_detail' username=my_user.username %}">
+                            <img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.avatar.name }}">
+                        </a>
+                    </div>
+                {% else %}
+                    Не удалось загрузить фото профиля
+                {% endif %}
+            {% else %}
+                <button class="button-login">
+                    <a href="{% url 'auth_app:login'%}">Войти</a>
+                </button>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                Фильтры
+            </div>
+            <div class="filter-buttons">
+                <div>
+                    {{ form.archived }}
+                    {{ form.archived.label }}
+                </div>
+                <div>
+                    {{ form.in_stock }}
+                    {{ form.in_stock.label }}
+                </div>
+            </div>
+            <div class="filter-range-price">
+                <span>Цена</span>
+                <div class="price-form">
+                    <input type="text" name="price_min" placeholder="от ..." id="id_price_0">
+                    <input type="text" name="price_max" placeholder="до ..." id="id_price_1">
+                </div>
+                <button type="submit">
+                    Применить
+                </button>
+            </div>
+        </aside>
+        <main>
+            {% if products %}
+                {% for product in products %}
+                    <div class="product">
+                        <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}" width="300" height="120" class="product-image">
+                        <h2 class="product-title"><a href="{% url 'shop_app:product_detail' pk=product.pk %}">{{ product.name }}</a></h2>
+                        <div class="product-bottom-bar">
+                            <p class="product-price">
+                                {{ product.price }} ₽
+                                {% if product.discount %}
+                                    <br>(скидка {{ product.discount }}%)
+                                {% endif %}
+                            </p>
+                            <div class="add-to-cart">
+                                <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                                    Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>Товары не найдены</h2>
+            {% endif %}
+        </main>
+    </div>
+
+    <script src="{% static 'js/products-to-cart.js' %}"></script>
+
+    <footer>
+        <p>&copy; 2025 Магазин товаров</p>
+    </footer>
+</form>
+</body>
+</html>

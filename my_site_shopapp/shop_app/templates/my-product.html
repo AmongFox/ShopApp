@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваши товары</title>
+    <link rel="stylesheet" href="{% static 'css/my-product.css' %}">
+</head>
+<body>
+    <header>
+        {% if my_user.is_staff %}
+            <h1><a href="{% url 'shop_app:product_list' %}">Назад</a></h1>
+        {% endif %}
+
+        <h1>Ваши товары</h1>
+
+        {% if my_user.is_staff %}
+            <h1><a href="{% url 'shop_app:product_create' %}">Создать товар</a></h1>
+        {% endif %}
+    </header>
+    <nav class="navbar">
+        <div>
+            <button type="submit">
+                <a href="{% url 'shop_app:product_list' %}">Что-то</a>
+            </button>
+        </div>
+        <div class="search-field">
+            <form method="get" action="">
+                {{ search_form.query }}
+                <button type="submit" class="search-button">
+                    <img src="{% static 'img/search-button.png' %}" alt="Иконка" class="search-button-icon">
+                </button>
+            </form>
+        </div>
+        <div class="user-profile-field">
+            {% if profile.avatar %}
+                <div class="user-profile-avatar">
+                    <a href="{% url 'profiles_app:profiles_detail' username=my_user.username %}">
+                        <img class="avatar" src="{{ profile.avatar.url }}" alt="{{ profile.avatar.name }}">
+                    </a>
+                </div>
+            {% else %}
+                Не удалось загрузить фото профиля
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        <main>
+            {% if products %}
+                {% for product in products %}
+                    <div class="product">
+                        <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}" width="300" height="120" class="product-image">
+                        <h2 class="product-title"><a href="{% url 'shop_app:product_detail' pk=product.pk %}">{{ product.name }}</a></h2>
+                        <div class="product-bottom-bar">
+                            <p class="product-price">
+                                {{ product.price }} ₽
+                                {% if product.discount %}
+                                    <br>(скидка {{ product.discount }}%)
+                                {% endif %}
+                            </p>
+                            <div class="product-edit">
+                                <button type="button" class="edit-button">
+                                    <a href="{% url 'shop_app:product_update' pk=product.pk %}">Редактировать</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>Товары не найдены</h2>
+            {% endif %}
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Магазин товаров</p>
+    </footer>
+</body>
+</html>

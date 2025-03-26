@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cache %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/profiles-detail.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль {{ profile.user.username }}</title>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Управление</h2>
+            <div class="buttons">
+                <button>
+                    <a href="{% url ''}">Корзина</a>
+                </button>
+                <button>
+                    <a href="{% url ''}">Желаемое</a>
+                </button>
+                <button>
+                    <a href="{% url ''}">Распродажа</a>
+                </button>
+                <button>
+                    <a href="{% url ''}">Что-то еще</a>
+                </button>
+            </div>
+        </aside>
+        <main>
+            {% if profile.user.pk == my_user.pk %}
+                <h1>Ваш профиль</h1>
+            {% else %}
+                 <h1>Профиль пользователя</h1>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <div>
+                    {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="{{ profile.avatar.name }}" class="avatar">
+                    {% else %}
+                        Не удалось загрузить фото профиля
+                    {% endif %}
+                </div>
+                <h3>
+                    {% if profile.user.is_staff %}
+                        <p>Администратор</p>
+                    {% endif %}
+                    {{ profile.user.username }}
+                </h3>
+                <h2>Подробнее</h2>
+                <div class="user_first_last_name">
+                    <p>Имя: {{ profile.name|default:'unknown' }}</p>
+                    <p>Фамилия: {{ profile.surname|default:'unknown' }}</p>
+                </div>
+                <p>О себе: {{ profile.bio|default:'unknown' }}</p>
+                <div class="personal_data">
+                    {% if profile.user.pk == my_user.pk or my_user.is_staff %}
+                        <h2>Личные данные</h2>
+                        <p>Почта: {{ profile.user.email }}</p>
+                        <p>Телефон: {{ profile.user.phone_number }}</p>
+                    {% endif %}
+                </div>
+                {% else %}
+                    <h2>Вы не авторизованы</h2>
+                {% endif %}
+            <div class="links">
+                <div>
+                    <a href="{% url 'profiles_app:profiles_list' %}">Список пользователей</a>
+                </div>
+                {% if profile.user.pk == my_user.pk or my_user.is_staff %}
+                    <div>
+                        <a href="{% url 'profiles_app:profiles_edit' username=user.username %}">Редактировать профиль</a>
+                    </div>
+                    {% if profile.user.pk == my_user.pk %}
+                        <div>
+                            <a href="{% url 'auth_app:logout' %}">Выйти</a>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div>
+                        <a href="{% url 'profiles_app:profiles_detail' username=my_user.username %}">Перейти на свой профиль</a>
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>

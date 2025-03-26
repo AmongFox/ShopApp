@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибка доступа</title>
+    <link rel="stylesheet" href="{% static 'css/error/product-forbidden.css' %}">
+</head>
+<body>
+    <div class="error-container">
+        <h1>Ошибка доступа</h1>
+        <p>У вас нет прав для доступа к этой странице.</p>
+
+        <form action="{% url 'profiles_app:profiles_list' %}" method="get">
+            <button type="submit">Вернуться на страницу пользователей</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% translate 'Регистрация' %}</title>
+</head>
+<body>
+<div class="register-container">
+    <h2>{% translate 'Регистрация пользователя' %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password_confirm.label_tag }}
+            {{ form.password_confirm }}
+        </div>
+        <button type="submit">{% translate 'Регистрация' %}</button>
+    </form>
+    {% if form.non_field_errors %}
+        <div class="error">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <a href="{% url 'auth_app:login'%}">{% translate 'Войти' %}</a>
+</div>
+</body>
+</html>

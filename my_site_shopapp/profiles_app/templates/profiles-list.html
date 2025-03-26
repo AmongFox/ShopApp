@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{% static 'css/profiles-list.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% translate 'Список пользователей' %}</title>
+</head>
+<body>
+<h1>{% translate 'Пользователи' %}</h1>
+{% if profiles %}
+<table>
+  <tr>
+    <th>{% translate 'Аватар' %}</th>
+    <th>{% translate 'Имя пользователя' %}</th>
+  </tr>
+  {% for profile in profiles %}
+  <tr>
+    <td>
+      {% if profile.avatar %}
+        <p><img src="{{ profile.avatar.url }}" alt="{{ profile.avatar.name }}" class="avatar"></p>
+      {% else %}
+        {% translate 'Не удалось загрузить фото профиля' %}
+      {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'profiles_app:profiles_detail' username=profile.user.username %}">{{ profile.user.username }}</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+  <h3>{% translate 'Нет пользователей' %}</h3>
+{% endif %}
+<div>
+    <a href="{% url 'profiles_app:profiles_detail' username=my_user.username %}">{% translate 'Вернуться к профилю' %}</a>
+</div>
+</body>
+</html>

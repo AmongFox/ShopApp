@@ -1,0 +1,172 @@
+body
+{
+    font-family: Arial, sans-serif;  margin: 0;  padding: 0;  background-color: #f4f4f4;
+}
+
+header
+{
+    display: flex;  flex-wrap: wrap;  justify-content: space-around;  margin-bottom: 20px; padding: 10px 0;  text-align: center;  color: white;  background: #35424a;  box-shadow: 0 0 2px 2px #3e4d57d9; 
+}
+
+header > h1
+{
+    margin: 20px 10px;
+}
+
+header > h1 > a
+{ transition: .5s;  text-decoration: none;
+
+    color: white; 
+}
+
+header > h1 > a:hover
+{
+    color: red;
+}
+
+main
+{
+    display: flex;  flex-wrap: wrap;  justify-content: flex-start;  padding: 20px;
+}
+
+.container
+{
+    display: flex;  margin: 0 100px;
+}
+
+.navbar
+{
+    display: flex;  flex-direction: row;  justify-content: space-around;
+}
+
+.search-field
+{
+    position: relative;  width: 100%;  max-width: 650px;  height: 50px;  transition: 2s;  border: 2px solid #cbcaca;  border-radius: 6px;  background-color: #d5d5d5;
+}
+
+.search-field:hover
+{ transition: .5s; 
+
+    border: 2px solid #a0a0a0;  background-color: #f5f5f5; box-shadow: 0 0 10px 1px #a0a0a0; 
+}
+
+.search-input
+{
+    font-size: 16px;  width: 90%;  max-width: 650px;  height: 29px;  padding: 10px;  border: none;  background-color: transparent;
+}
+
+.search-input:focus-visible
+{
+    outline: none;
+}
+
+.search-button
+{
+    position: absolute;  margin: 5px;  margin-left: -2px;  padding: 6px;  transition: 1s; border: none;  border-radius: 20px;  background-color: transparent; 
+}
+
+.search-button:hover
+{
+    transition: 1s; 
+
+    background: radial-gradient(#ccc, #f5f5f5); box-shadow: 0 0 2px 2px #ccc;;
+}
+
+.search-button-icon
+{
+    width: 25px;  height: 25px;
+}
+
+.user-profile-avatar
+{
+    width: 50px;  height: 50px;
+}
+
+.user-profile-avatar > a
+{ display: block; 
+
+    width: 50px;  height: 50px;  border-radius: 50%;
+}
+
+.avatar
+{
+    width: 50px;  height: 50px;  border: 1px solid #454040;  border-radius: 50%;  box-shadow: 0 0 4px 1px #6d6c6c; object-fit: cover; 
+}
+
+.user-profile-name
+{
+    font-size: 0;  font-weight: bold;
+}
+
+.sidebar
+{
+    width: 250px;  min-width: 150px;  max-width: 250px;  height: 1000px;  margin: 35px 0;  padding: 20px;  border: 1px solid #c2c4c5;  border-radius: 5px;  background-color: white;  box-shadow: 0 0 2px 2px #dbdbdbd9;
+}
+
+.sidebar > h2
+{ margin: 10px 0;
+
+    color: black; 
+}
+
+.product
+{
+    display: flex;  flex-direction: column;  justify-content: space-between;  width: 250px;  margin: 15px;  padding: 20px;  border: 1px solid #ddd;  border-radius: 5px;  background: #fff;  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.product-image
+{
+    max-width: 100%;  height: auto;  border: 1px solid #bbb;  border-radius: 10px;  box-shadow: 0 0 5px 3px rgba(0, 0, 0, .1);
+}
+
+.product-title
+{
+    font-size: 18px;  margin-top: 10px;  margin-bottom: 15px;  text-align: center;
+}
+
+.product-title > a
+{ transition: .5s;  text-decoration: none;
+
+    color: black; 
+}
+
+.product-title > a:hover
+{
+    color: red;
+}
+
+.product-description
+{
+    font-size: 14px;  color: #555;
+}
+
+.product-price
+{
+    font-size: 18px;  margin: 2px;  color: #e67e22;
+}
+
+.product-bottom-bar
+{
+    display: flex;  align-items: flex-end; justify-content: space-between; 
+}
+
+.add-to-cart
+{
+    text-align: end;
+}
+
+.add-to-cart-btn
+{
+    padding: 12px;  cursor: pointer; border: 1px solid #e3e3e3;  border-radius: 12px;  background-color: white; 
+}
+
+.add-to-cart-btn:hover
+{ border-color: #d7931d;
+    background: radial-gradient(#f5c82e, #f5ac2e); 
+}
+
+footer
+{ padding: 10px 0; 
+
+    text-align: center;  color: #fff; background: #35424a; 
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/product-detail.css' %}">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <details>
+                <summary>Меню</summary>
+                <ul class="table-menu">
+                    <li>
+                        Аккаунт
+                    </li>
+                    <li>
+                        Корзина
+                    </li>
+                    <li>
+                        Каталог
+                    </li>
+                </ul>
+            </details>
+        </div>
+        <div class="for-users">
+            <div>
+                <a href="https://">Акции</a>
+            </div>
+            <div>
+                <a href="https://">Поддержка</a>
+            </div>
+            <div>
+                <a href="https://">Доставка</a>
+            </div>
+            <div>
+                <details>
+                    <summary>Для покупателей</summary>
+                </details>
+            </div>
+            <div>
+                <a href="https://">Юридическим лицам</a>
+            </div>
+            <div>
+                <a href="https://">Контакты</a>
+            </div>
+            <div>
+                <a href="https://">Мы в телеграмме</a>
+            </div>
+        </div>
+        <div class="number-phone">
+            8-904-867-86-46
+        </div>
+    </header>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+        </div>
+        <div class="product-details">
+            <h1 class="product-title">{{ product.name }}</h1>
+            <p class="product-description">
+                {{ product.description }}
+            </p>
+            <p class="product-price">Цена: {{ product.price }} ₽</p>
+            <div class="buttons">
+                <button type="button" id="favorite-btn" class="add-to-favorite-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-favorite-pk="{{ product.favorite_product.first.pk }}" data-is-favorite="{{ product.favorite_product.exists|yesno:'true,false' }}">
+                    <img src="{% static 'img/add-to-favorite-button.png' %}" class="favorite-button-icon">
+                    <span class="favorite-tooltip">{% if is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}</span>
+                </button>
+                <button type="button" id="cart-btn" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                    Добавить в корзину
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>const STATIC_URL = "{% static '' %}";</script>
+    <script src="{% static 'js/to-favorite.js' %}"></script>
+    <script src="{% static 'js/product-to-cart.js' %}"></script>
+</body>
+</html>
