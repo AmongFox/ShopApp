@@ -1,40 +1,122 @@
 <!DOCTYPE html>
 {% load static %}
-{% load i18n %}
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% translate 'Регистрация' %}</title>
+    <title>Регистрация | Магазин товаров</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<div class="register-container">
-    <h2>{% translate 'Регистрация пользователя' %}</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.username.label_tag }}
-            {{ form.username }}
+    <div class="auth-wrapper">
+        <div class="auth-decoration">
+            <div class="decoration-content">
+                <h2>Добро пожаловать!</h2>
+                <p>Присоединяйтесь к нашему сообществу покупателей</p>
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Эксклюзивные предложения</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>История заказов</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Быстрое оформление</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {{ form.phone_number.label_tag }}
-            {{ form.phone_number }}
+
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Создать аккаунт</h1>
+                <p>Заполните форму для регистрации</p>
+            </div>
+
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_username">
+                        <i class="fas fa-user"></i> Имя пользователя
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error-message">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_email">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="error-message">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_phone_number">
+                            <i class="fas fa-phone"></i> Телефон
+                        </label>
+                        {{ form.phone_number }}
+                        {% if form.phone_number.errors %}
+                            <div class="error-message">{{ form.phone_number.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_password">
+                            <i class="fas fa-lock"></i> Пароль
+                        </label>
+                        {{ form.password }}
+                        <div class="password-toggle">
+                            <i class="fas fa-eye" id="togglePassword1"></i>
+                        </div>
+                        {% if form.password.errors %}
+                            <div class="error-message">{{ form.password.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password_confirm">
+                            <i class="fas fa-lock"></i> Подтверждение
+                        </label>
+                        {{ form.password_confirm }}
+                        <div class="password-toggle">
+                            <i class="fas fa-eye" id="togglePassword2"></i>
+                        </div>
+                        {% if form.password_confirm.errors %}
+                            <div class="error-message">{{ form.password_confirm.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if form.non_field_errors %}
+                    <div class="error-message non-field">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+
+                <div class="auth-footer">
+                    <p>Уже есть аккаунт? <a href="{% url 'auth_app:login'%}">Войти</a></p>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            {{ form.password_confirm.label_tag }}
-            {{ form.password_confirm }}
-        </div>
-        <button type="submit">{% translate 'Регистрация' %}</button>
-    </form>
-    {% if form.non_field_errors %}
-        <div class="error">{{ form.non_field_errors }}</div>
-    {% endif %}
-    <a href="{% url 'auth_app:login'%}">{% translate 'Войти' %}</a>
-</div>
+    </div>
+
+    <script src="{% static 'js/signup.js' %}"></script>
 </body>
 </html>

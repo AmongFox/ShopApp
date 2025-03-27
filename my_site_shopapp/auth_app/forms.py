@@ -8,11 +8,44 @@ from profiles_app.models import UserProfileModel
 
 
 class UserSignupForm(forms.ModelForm):
-    username = forms.CharField(label=_("Имя пользователя"), max_length=40, required=True)
-    password = forms.CharField(label=_("Пароль"), widget=forms.PasswordInput, required=True)
-    password_confirm = forms.CharField(label=_("Подтверждение пароля"), widget=forms.PasswordInput, required=True)
-    email = forms.EmailField(label=_("Почта"), required=True)
-    phone_number = forms.CharField(label=_("Номер телефона"), min_length=11, max_length=12, required=True)
+    username = forms.CharField(
+        label=_("Имя пользователя"),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': _('Имя пользователя'),
+            }),
+        max_length=40,
+        required=True
+    )
+    password = forms.CharField(
+        label=_("Пароль"),
+        widget=forms.PasswordInput(attrs={
+            'placeholder': _('Введите пароль'),
+        }),
+        required=True,
+        ),
+    password_confirm = forms.CharField(
+        label=_("Подтверждение пароля"),
+        widget=forms.PasswordInput(attrs={
+            'placeholder': _('Повторите пароль'),
+        }),
+        required=True)
+    email = forms.EmailField(
+        label=_("Почта"),
+        widget=forms.EmailInput(attrs={
+            'placeholder': _('example@mail.com'),
+        }),
+        required=True
+    )
+    phone_number = forms.CharField(
+        label=_("Номер телефона"),
+        widget=forms.TextInput(attrs={
+            'placeholder': _('+71234567890'),
+        }),
+        min_length=11,
+        max_length=12,
+        required=True
+    )
 
     class Meta:
         model = CustomUserModel
