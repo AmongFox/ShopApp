@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+<body>
+    <h1>Оформление заказа</h1>
+
+    <div class="order-summary">
+        <h2>Ваш заказ</h2>
+        <div id="order-items">
+            {% for product in products %}
+                <div class="order-item">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.price }} ₽</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="order-total">
+            <h3>Итого: {{ total_price }} ₽</h3>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Подтвердить заказ</button>
+    </form>
+
+    <script src="{% static 'js/checkout.js' %}"></script>
+</body>
+</html>

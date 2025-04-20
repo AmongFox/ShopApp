@@ -13,6 +13,23 @@
     --transition: all 0.3s ease;
 }
 
+/* Убирает стандартную иконку показа пароля */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Для современных браузеров */
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+/* Для Firefox */
+input[type="password"]::-moz-text-metrics {
+  display: none;
+}
+
 /* Базовые стили */
 * {
     margin: 0;

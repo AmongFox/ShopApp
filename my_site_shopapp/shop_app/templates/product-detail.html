@@ -2,7 +2,6 @@
 {% load static %}
 <html lang="ru">
 <head>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ product.name }}</title>
@@ -66,18 +65,19 @@
             </p>
             <p class="product-price">Цена: {{ product.price }} ₽</p>
             <div class="buttons">
-                <button type="button" id="favorite-btn" class="add-to-favorite-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-favorite-pk="{{ product.favorite_product.first.pk }}" data-is-favorite="{{ product.favorite_product.exists|yesno:'true,false' }}">
+                <button type="button" id="favorite-btn" class="add-to-favorite-btn" data-product-pk="{{ product.pk }}" data-favorite-pk="{{ product.favorite_products.first.pk }}" data-is-favorite="{{ product.favorite_products.exists|yesno:'true,false' }}">
                     <img src="{% static 'img/add-to-favorite-button.png' %}" class="favorite-button-icon">
                     <span class="favorite-tooltip">{% if is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}</span>
                 </button>
-                <button type="button" id="cart-btn" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                <button type="button" id="cart-btn" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-cart-pk="{{ product.cart_products.first.pk }}" data-is-cart="{{ product.cart_products.exists|yesno:'true,false' }}">
                     Добавить в корзину
                 </button>
             </div>
         </div>
     </div>
     <script>const STATIC_URL = "{% static '' %}";</script>
-    <script src="{% static 'js/to-favorite.js' %}"></script>
+    <script>const csrftoken = "{{ csrf_token }}";</script>
+    <script src="{% static 'js/product-to-favorite.js' %}"></script>
     <script src="{% static 'js/product-to-cart.js' %}"></script>
 </body>
 </html>

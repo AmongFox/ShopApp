@@ -1,5 +1,4 @@
 from django.db import models
-
 from auth_app.models import CustomUserModel
 from django_resized import ResizedImageField
 
@@ -10,7 +9,7 @@ def product_preview_directory_path(instance: "ProductModel", filename: str) -> s
 
 class ProductModel(models.Model):
     """Product"""
-    name = models.CharField(max_length=150, db_index=True)
+    name = models.CharField(max_length=60, db_index=True)
     description = models.TextField(max_length=500, null=False, blank=True, db_index=True)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     discount = models.PositiveSmallIntegerField(default=0)

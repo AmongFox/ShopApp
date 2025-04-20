@@ -1,10 +1,11 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import ProductModel
+from shop_app_api.models import Order
 
 
 class ProductForm(forms.ModelForm):
-    name = forms.CharField(label=_('Название'), max_length=50)
+    name = forms.CharField(label=_('Название'), max_length=60)
     description = forms.CharField(label=_('Описание'), max_length=500)
     price = forms.DecimalField(label=_('Цена'), min_value=0, max_digits=8, decimal_places=2)
     discount = forms.IntegerField(label=_('Скидка'), min_value=0, max_value=100, step_size=5, required=False)
@@ -37,3 +38,22 @@ class ProductForm(forms.ModelForm):
             product.save()
 
         return product
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = [
+            'user',
+            # 'created_at',
+            'status',
+            'total_price',
+        ]
+
+
+class CheckoutForm(forms.Form):
+    name = forms.CharField(label='ФИО', max_length=100)
+    email = forms.EmailField(label='Email')
+    phone = forms.CharField(label='Телефон', max_length=20)
+    address = forms.CharField(label='Адрес доставки', widget=forms.Textarea)
+    comment = forms.CharField(label='Комментарий к заказу', widget=forms.Textarea, required=False)

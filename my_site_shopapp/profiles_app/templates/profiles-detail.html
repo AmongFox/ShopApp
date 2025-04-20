@@ -14,16 +14,19 @@
             <h2>Управление</h2>
             <div class="buttons">
                 <button>
+                    <a href="{% url 'shop_app:shop_main_page' %}">Магазин</a>
+                </button>
+                <button>
                     <a href="{% url 'shop_app:cart_product_list' %}">Корзина</a>
                 </button>
                 <button>
                     <a href="{% url 'shop_app:favorite_product_list' %}">Желаемое</a>
                 </button>
                 <button>
-                    <a href="{% url ''}">Распродажа</a>
+                    <a href="">Распродажа</a>
                 </button>
                 <button>
-                    <a href="{% url ''}">Что-то еще</a>
+                    <a href="">Что-то еще</a>
                 </button>
             </div>
         </aside>
@@ -49,10 +52,10 @@
                 </h3>
                 <h2>Подробнее</h2>
                 <div class="user_first_last_name">
-                    <p>Имя: {{ profile.name|default:'unknown' }}</p>
-                    <p>Фамилия: {{ profile.surname|default:'unknown' }}</p>
+                    <p>Имя: {{ profile.name|default:'' }}</p>
+                    <p>Фамилия: {{ profile.surname|default:'' }}</p>
                 </div>
-                <p>О себе: {{ profile.bio|default:'unknown' }}</p>
+                <p>О себе: {{ profile.bio|default:'' }}</p>
                 <div class="personal_data">
                     {% if profile.user.pk == my_user.pk or my_user.is_staff %}
                         <h2>Личные данные</h2>

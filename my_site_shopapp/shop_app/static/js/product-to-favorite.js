@@ -7,15 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработчик клика
     favoriteButton.addEventListener('click', function() {
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         const productId = this.getAttribute('data-product-pk');
-        const userId = this.getAttribute('data-user-pk');
         const isFavorite = this.getAttribute('data-is-favorite') === 'true';
 
         const method = isFavorite ? 'DELETE' : 'POST';
         const url = isFavorite
-            ? `/shop/product/api/favorite/delete/${this.getAttribute('data-favorite-pk')}/`
-            : '/shop/product/api/favorite/create/';
+            ? `/shop/product/api/favorite/remove/${this.getAttribute('data-favorite-pk')}/`
+            : '/shop/product/api/favorite/add/';
 
         fetch(url, {
             method: method,
@@ -24,8 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'X-CSRFToken': csrftoken,
             },
             body: JSON.stringify({
-                user: userId,
-                product: productId,
+                product_id: productId,
             }),
         })
         .then(response => {

@@ -2,7 +2,6 @@
 {% load static %}
 <html lang="ru">
 <head>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин товаров</title>
@@ -52,13 +51,13 @@
             </div>
         </div>
         <div class="number-phone">
-            8-904-867-86-46
+            8-777-888-99-10
         </div>
     </header>
     <nav class="navbar">
         <div>
-            <button type="submit">
-                Пока что хз
+            <button type="button" class="button-redirect">
+                <a href="{% url 'shop_app:shop_main_page' %}">Вернуться на главную</a>
             </button>
         </div>
         <div class="search-field">
@@ -88,59 +87,79 @@
         </div>
     </nav>
     <div class="container">
-        <main>
-            <div class="catalog-container">
-                <div class="block-catalog-sale">
-                    <a href="{% url}">
-                        <div class="block-catalog-title-field">
-                            Акции
-                        </div>
-                        <div class="block-catalog-description-field">
-                            Скидки, выгодные предложения и многое другое!
-                        </div>
-                    </a>
-                </div>
-                <div class="block-catalog-gifts">
-                    <a href="{% url}">
-                        <div class="block-catalog-title-field">
-                            Подарки
-                        </div>
-                        <div class="block-catalog-description-field">
-                            товары родным, близким и друзьям
-                        </div>
-                    </a>
-                </div>
-                <div class="block-catalog-service">
-                    <a href="{% url}">
-                        <div class="block-catalog-title-field">
-                            Сервис
-                        </div>
-                        <div class="block-catalog-description-field">
-                            Гарантия, возврат и обмен
-                        </div>
-                    </a>
-                </div>
-                <div class="block-catalog-sale">
-                    <a href="{% url}">
-                        <div class="block-catalog-title-field">
-                            Акции
-                        </div>
-                        <div class="block-catalog-description-field">
-                            Скидки, выгодные предложения и многое другое!
-                        </div>
-                    </a>
-                </div>
-                <div class="block-catalog-gifts">
-                    <a href="{% url}">
-                        <div class="block-catalog-title-field">
-                            Подарки
-                        </div>
-                        <div class="block-catalog-description-field">
-                            товары родным, близким и друзьям
-                        </div>
-                    </a>
-                </div>
+        <div class="catalog-container">
+            <div class="block-catalog-sale">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Акции
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Скидки, выгодные предложения и многое другое!
+                    </div>
+                </a>
             </div>
+            <div class="block-catalog-gifts">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Подарки
+                    </div>
+                    <div class="block-catalog-description-field">
+                        товары родным, близким и друзьям
+                    </div>
+                </a>
+            </div>
+            <div class="block-catalog-service">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Сервис
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Гарантия, возврат и обмен
+                    </div>
+                </a>
+            </div>
+            <div class="block-catalog-business">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Для бизнеса
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Оптовые закупки и B2B
+                    </div>
+                </a>
+            </div>
+            <div class="block-catalog-new">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Новинки
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Свежие поступления в каталоге
+                    </div>
+                </a>
+            </div>
+            <div class="block-catalog-bestsellers">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Хиты продаж
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Самые популярные товары
+                    </div>
+                </a>
+            </div>
+            <div class="block-catalog-clearance">
+                <a href="">
+                    <div class="block-catalog-title-field">
+                        Распродажа
+                    </div>
+                    <div class="block-catalog-description-field">
+                        Товары со скидкой до 70%
+                    </div>
+                </a>
+            </div>
+        </div>
+        <main>
             {% if products %}
                 {% for product in products %}
                     <div class="product">
@@ -154,7 +173,7 @@
                                 {% endif %}
                             </p>
                             <div class="add-to-cart">
-                                <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                                <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_products.first.pk }}" data-is-cart="{{ product.cart_products.exists|yesno:'true,false' }}">
                                     Добавить в корзину
                                 </button>
                             </div>
@@ -167,6 +186,7 @@
         </main>
     </div>
 
+    <script>const csrftoken = "{{ csrf_token }}";</script>
     <script src="{% static 'js/products-to-cart.js' %}"></script>
 
     <footer>

@@ -2,14 +2,13 @@
 {% load static %}
 <html lang="ru">
 <head>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин товаров</title>
     <link rel="stylesheet" href="{% static 'css/product-list.css' %}">
 </head>
 <body>
-<form method="get">
+<!--<form method="get">-->
     <header>
         <div class="menu">
             <details>
@@ -53,20 +52,22 @@
             </div>
         </div>
         <div class="number-phone">
-            8-904-867-86-46
+            8-777-888-99-10
         </div>
     </header>
     <nav class="navbar">
         <div>
-            <button class=button-redirect">
+            <button type="button" class="button-redirect">
                 <a href="{% url 'shop_app:shop_main_page' %}">Вернуться на главную</a>
             </button>
         </div>
         <div class="search-field">
+            <form method="get" action="">
                 {{ form.name }}
                 <button type="submit">
                     <img src="{% static 'img/search-button.png' %}" alt="Иконка" class="search-button-icon">
                 </button>
+            </form>
         </div>
         <div class="user-profile-field">
             {% if my_user %}
@@ -126,7 +127,7 @@
                                 {% endif %}
                             </p>
                             <div class="add-to-cart">
-                                <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                                <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-cart-pk="{{ product.cart_products.first.pk }}" data-is-cart="{{ product.cart_products.exists|yesno:'true,false' }}">
                                     Добавить в корзину
                                 </button>
                             </div>
@@ -139,11 +140,12 @@
         </main>
     </div>
 
+    <script>const csrftoken = "{{ csrf_token }}";</script>
     <script src="{% static 'js/products-to-cart.js' %}"></script>
 
     <footer>
         <p>&copy; 2025 Магазин товаров</p>
     </footer>
-</form>
+<!--</form>-->
 </body>
 </html>

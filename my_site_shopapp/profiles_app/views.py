@@ -16,7 +16,7 @@ class ProfilesDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')
         user = get_object_or_404(CustomUserModel, username=username)
-        return get_object_or_404(UserProfileModel, user=user)
+        return UserProfileModel.objects.get_or_create(user=user)[0]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -2,28 +2,53 @@
 {% load static %}
 <html lang="ru">
 <head>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корзина</title>
     <link rel="stylesheet" href="{% static 'css/cart-product-list.css' %}">
 </head>
 <body>
-    <main>
+    <div class="header-container">
+        <a href="{% url 'shop_app:shop_main_page' %}" class="home-button">На главную</a>
         <h1>Ваша корзина</h1>
-
+    </div>
+    <aside class="cart-summary">
+        <div class="summary-content">
+            <h3>Итого</h3>
+            <div class="total-items">
+                <span class="items-count">Товары (0)</span>
+                <span class="total-price">0 ₽</span>
+            </div>
+            <button id="checkout-btn" class="checkout-button" disabled>Оформить заказ</button>
+        </div>
+    </aside>
+    <main>
         {% if products %}
             <div class="products-grid">
                 {% for product in products %}
                     <div class="product-block">
+                        <div class="product-selector">
+                            <input type="checkbox"
+                                   class="product-checkbox"
+                                   id="product-{{ product.pk }}"
+                                   data-product-id="{{ product.pk }}"
+                                   data-product-price="{{ product.price }}">
+                            <label for="product-{{ product.pk }}"></label>
+                        </div>
                         <a href="{% url 'shop_app:product_detail' pk=product.pk %}">
                             <p>{{ product.name }}</p>
                         </a>
                         <p>{{ product.description|truncatechars:100 }}</p>
-                        <p>{{ product.price }} ₽</p>
-                        <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
-                            Добавить в корзину
-                        </button>
+                        <p class="product-price">{{ product.price }} ₽</p>
+                        <div class="buttons">
+                            <button type="button" id="favorite-btn" class="add-to-favorite-btn" data-product-pk="{{ product.pk }}" data-favorite-pk="{{ product.favorite_products.first.pk }}" data-is-favorite="{{ product.favorite_products.exists|yesno:'true,false' }}">
+                                <img src="{% static 'img/add-to-favorite-button.png' %}" class="favorite-button-icon">
+                                <span class="favorite-tooltip">{% if is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}</span>
+                            </button>
+                            <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-cart-pk="{{ product.cart_products.first.pk }}" data-is-cart="{{ product.cart_products.exists|yesno:'true,false' }}">
+                                Добавить в корзину
+                            </button>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -33,6 +58,10 @@
             </div>
         {% endif %}
     </main>
+    <script>const STATIC_URL = "{% static '' %}";</script>
+    <script>const csrftoken = "{{ csrf_token }}";</script>
     <script src="{% static 'js/products-to-cart.js' %}"></script>
+    <script src="{% static 'js/products-to-favorite.js' %}"></script>
+    <script src="{% static 'js/product-summary.js' %}"></script>
 </body>
 </html>

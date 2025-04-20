@@ -1,12 +1,18 @@
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView, FormView
 
-from .forms import ProductForm
+from .forms import ProductForm, OrderForm, CheckoutForm
 from .filters import ProductFilter
 from .models import ProductModel
 from profiles_app.models import UserProfileModel
+from shop_app_api.models import CartProduct, Cart, FavoriteProduct, Favorite
+
+from shop_app_api.serializers import ProductSerializer
 
 
 class ShopMainPageView(ListView):
@@ -139,15 +145,16 @@ class ProductDeleteView(DeleteView):
     model = ProductModel
 
 
-class CartProductListView(ListView):
+class CartProductListView(LoginRequiredMixin, ListView):
     template_name = 'cart-product-list.html'
     context_object_name = 'products'
     model = ProductModel
 
     def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return ProductModel.objects.filter(cart_product__user=user)
+        cart = Cart.objects.get_or_create(user=self.request.user)[0]
+        return ProductModel.objects.filter(
+            cart_products__cart=cart
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -155,12 +162,52 @@ class CartProductListView(ListView):
         return context
 
 
-class FavoriteProductListView(ListView):
+class FavoriteProductListView(LoginRequiredMixin, ListView):
     template_name = 'favorite-product-list.html'
     context_object_name = 'products'
     model = ProductModel
 
     def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return ProductModel.objects.filter(favorite_product__user=user)
+        favorite = Favorite.objects.get_or_create(user=self.request.user)[0]
+        return ProductModel.objects.filter(
+            favoriteproduct__favorite=favorite
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['my_user'] = self.request.userCartProduct
+        return context
+
+
+class CheckoutView(LoginRequiredMixin, FormView):
+    template_name = 'checkout.html'
+    form_class = CheckoutForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        selected_ids = self.request.session.get('selected_products', [])
+        products = ProductModel.objects.filter(id__in=selected_ids)
+        context['products'] = products
+        context['total_price'] = sum(product.price for product in products)
+        return context
+
+    def get(self, request, *args, **kwargs):
+        # Получаем выбранные товары из sessionStorage (переданные через AJAX)
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            print("Start load")
+            selected_ids = json.loads(request.GET.get('selected_products', '[]'))
+            request.session['selected_products'] = selected_ids
+            products = ProductModel.objects.filter(id__in=selected_ids)
+            serializer = ProductSerializer(products, many=True)
+            return JsonResponse({
+                'products': serializer.data,
+                'total_price': sum(product.price for product in products)
+            })
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Обработка успешного оформления заказа
+        selected_ids = self.request.session.get('selected_products', [])
+        products = ProductModel.objects.filter(id__in=selected_ids)
+        # Здесь логика создания заказа
+        return super().form_valid(form)

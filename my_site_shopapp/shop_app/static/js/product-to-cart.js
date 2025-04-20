@@ -7,15 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработчик клика
     cartButton.addEventListener('click', function() {
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         const productId = this.getAttribute('data-product-pk');
-        const userId = this.getAttribute('data-user-pk');
         const isCart = this.getAttribute('data-is-cart') === 'true';
 
         const method = isCart ? 'DELETE' : 'POST';
         const url = isCart
-            ? `/shop/product/api/cart/delete/${this.getAttribute('data-cart-pk')}/`
-            : '/shop/product/api/cart/create/';
+            ? `/shop/product/api/cart/remove/${this.getAttribute('data-cart-pk')}/`
+            : '/shop/product/api/cart/add/';
 
         fetch(url, {
             method: method,
@@ -24,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'X-CSRFToken': csrftoken,
             },
             body: JSON.stringify({
-                user: userId,
-                product: productId,
+                product_id: productId,
+                quantity: 1,
             }),
         })
         .then(response => {
