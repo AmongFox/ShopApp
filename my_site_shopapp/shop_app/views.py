@@ -170,12 +170,12 @@ class FavoriteProductListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         favorite = Favorite.objects.get_or_create(user=self.request.user)[0]
         return ProductModel.objects.filter(
-            favoriteproduct__favorite=favorite
+            favorite_products__favorite=favorite
         )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['my_user'] = self.request.userCartProduct
+        context['my_user'] = self.request.user
         return context
 
 

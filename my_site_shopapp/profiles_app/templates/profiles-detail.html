@@ -52,15 +52,15 @@
                 </h3>
                 <h2>Подробнее</h2>
                 <div class="user_first_last_name">
-                    <p>Имя: {{ profile.name|default:'' }}</p>
-                    <p>Фамилия: {{ profile.surname|default:'' }}</p>
+                    <p>Имя: {{ profile.name|default:'Отсутствует' }}</p>
+                    <p>Фамилия: {{ profile.surname|default:'Отсутствует' }}</p>
                 </div>
-                <p>О себе: {{ profile.bio|default:'' }}</p>
+                <p>О себе: {{ profile.bio|default:'Отсутствует' }}</p>
                 <div class="personal_data">
                     {% if profile.user.pk == my_user.pk or my_user.is_staff %}
                         <h2>Личные данные</h2>
-                        <p>Почта: {{ profile.user.email }}</p>
-                        <p>Телефон: {{ profile.user.phone_number }}</p>
+                        <p>Почта: {{ profile.user.email|default:'Отсутствует' }}</p>
+                        <p>Телефон: {{ profile.user.phone_number|default:'Отсутствует' }}</p>
                     {% endif %}
                 </div>
                 {% else %}

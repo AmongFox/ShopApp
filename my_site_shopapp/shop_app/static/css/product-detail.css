@@ -143,11 +143,11 @@ header {
 }
 
 .add-to-favorite-btn {
-  background-color: var(--light-color);
+  background-color: transparent;
 }
 
 .remove-to-favorite-btn {
-  background-color: var(--accent-color);
+  background-color: transparent;
 }
 
 .add-to-favorite-btn:hover {
@@ -155,7 +155,7 @@ header {
 }
 
 .remove-to-favorite-btn:hover {
-  background-color: #d91a6d;
+  background-color: #f7259c54;
 }
 
 .favorite-button-icon {
@@ -201,17 +201,17 @@ header {
 }
 
 .add-to-cart-btn {
-  background-color: var(--primary-color);
+  background-color: #4361ee;
   color: white;
 }
 
 .remove-to-cart-btn {
-  background-color: var(--accent-color);
+  background-color: #f7259ca6;
   color: white;
 }
 
 .add-to-cart-btn:hover {
-  background-color: var(--secondary-color);
+  background-color: #3a0ca3;
   transform: translateY(-2px);
 }
 
@@ -226,7 +226,7 @@ header {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .product-image {
     min-width: auto;
   }

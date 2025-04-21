@@ -6,7 +6,7 @@ from shop_app_api.models import Order
 
 class ProductForm(forms.ModelForm):
     name = forms.CharField(label=_('Название'), max_length=60)
-    description = forms.CharField(label=_('Описание'), max_length=500)
+    description = forms.CharField(label=_('Описание'), max_length=1000)
     price = forms.DecimalField(label=_('Цена'), min_value=0, max_digits=8, decimal_places=2)
     discount = forms.IntegerField(label=_('Скидка'), min_value=0, max_value=100, step_size=5, required=False)
     quantity = forms.IntegerField(label=_('Количество'), min_value=0, max_value=1000, step_size=10, required=False)

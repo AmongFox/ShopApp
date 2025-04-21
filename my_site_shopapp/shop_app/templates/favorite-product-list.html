@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/favorite-product-list.css' %}">
 </head>
 <body>
-    <main>
+    <div class="header-container">
+        <button onclick="window.history.back();" class="home-button">Назад</button>
         <h1>Ваши избранные</h1>
-
+    </div>
+    <main>
         {% if products %}
             <div class="products-grid">
                 {% for product in products %}
@@ -25,7 +27,7 @@
                                 <img src="{% static 'img/add-to-favorite-button.png' %}" class="favorite-button-icon">
                                 <span class="favorite-tooltip">{% if is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}</span>
                             </button>
-                            <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_product.exists|yesno:'true,false' }}">
+                            <button type="button" class="add-to-cart-btn" data-product-pk="{{ product.pk }}" data-user-pk="{{ my_user.pk }}" data-cart-pk="{{ product.cart_product.first.pk }}" data-is-cart="{{ product.cart_products.exists|yesno:'true,false' }}">
                                 Добавить в корзину
                             </button>
                         </div>

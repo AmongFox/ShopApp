@@ -2,7 +2,7 @@
 :root {
   --primary-color: #4361ee;
   --secondary-color: #3f37c9;
-  --accent-color: #f72585;
+  --accent-color: #f7259c54;
   --light-color: #f8f9fa;
   --dark-color: #212529;
   --success-color: #4cc9f0;
@@ -55,9 +55,10 @@ main {
 
 .home-button {
     padding: 8px 16px;
-    background-color: var(--primary-color);
+    background-color: #4361ee;
     color: white;
     text-decoration: none;
+    border: 1px solid #534aed;
     border-radius: var(--border-radius);
     font-weight: 500;
     transition: var(--transition);
@@ -67,7 +68,7 @@ main {
 }
 
 .home-button:hover {
-    background-color: var(--secondary-color);
+    background-color: #3f37c9;
     transform: translateY(-2px);
     box-shadow: var(--shadow);
 }
@@ -220,8 +221,8 @@ main {
 /* Стили для таблицы товаров */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
     margin-top: 20px;
 }
 
@@ -299,72 +300,75 @@ main {
     justify-content: flex-end;
 }
 
-.add-to-cart-btn {
-    padding: 10px 15px;
-    cursor: pointer;
-    border: 1px solid #e3e3e3;
-    border-radius: var(--border-radius);
-    background-color: white;
-    font-weight: 500;
-    transition: var(--transition);
+.add-to-cart-btn,
+.remove-to-cart-btn {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.add-to-cart-btn:hover {
-    border-color: var(--warning-color);
-    background: radial-gradient(#f5c82e, #f5ac2e);
-    color: white;
+.add-to-cart-btn {
+  background-color: #4361ee;
+  color: white;
 }
 
 .remove-to-cart-btn {
-    padding: 10px 15px;
-    cursor: pointer;
-    border: 1px solid #b7b4b4;
-    border-radius: var(--border-radius);
-    background: radial-gradient(#f5c82e, #f5ac2e);
-    color: white;
-    font-weight: 500;
-    transition: var(--transition);
+  background-color: #f7259ca6;
+  color: white;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #3a0ca3;
+  transform: translateY(-2px);
 }
 
 .remove-to-cart-btn:hover {
-    border-color: var(--warning-color);
-    background-color: white;
-    color: #333;
+  background-color: #d91a6d;
+  transform: translateY(-2px);
 }
 
 .add-to-favorite-btn,
 .remove-to-favorite-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 30%;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .add-to-favorite-btn {
-    background-color: var(--light-color);
+  background-color: transparent;
 }
 
 .remove-to-favorite-btn {
-    background-color: var(--accent-color);
+  background-color: transparent;
 }
 
 .add-to-favorite-btn:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 .remove-to-favorite-btn:hover {
-    background-color: #d91a6d;
+  background-color: var(--accent-color);
 }
 
 .favorite-button-icon {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .favorite-tooltip {

@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <h1>Импорт данных из JSON</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="margin-bottom: 20px;">
+            <input type="file" name="json_file" accept=".json">
+        </div>
+        <button type="submit" class="button">Загрузить</button>
+        <a href="../" class="button">Отмена</a>
+    </form>
+    
+    <div style="margin-top: 30px;">
+        <h3>Формат JSON файла:</h3>
+        <p>Для стандартного формата Django:</p>
+        <pre>[
+    {
+        "model": "yourapp.yourmodel",
+        "pk": 1,
+        "fields": {
+            "name": "Образец",
+            "value": 100
+        }
+    }
+]</pre>
+        
+        <p>Или простой формат:</p>
+        <pre>[
+    {
+        "name": "Образец",
+        "value": 100
+    }
+]</pre>
+    </div>
+</div>
+{% endblock %}
