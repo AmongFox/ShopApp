@@ -1,6 +1,7 @@
-from shop_app.models import ProductModel
-from auth_app.models import CustomUserModel
 from django.db import models
+
+from auth_app.models import CustomUserModel
+from shop_app.models import ProductModel
 
 
 class Cart(models.Model):

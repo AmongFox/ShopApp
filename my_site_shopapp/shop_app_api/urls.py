@@ -1,10 +1,11 @@
 from django.urls import path
+
 from .views import (
     AddToCartAPIView,
-    RemoveFromCartAPIView,
     AddToFavoriteAPIView,
     FavoriteProductDeleteView,
     OrderCreateView,
+    RemoveFromCartAPIView,
     SelectedProductsAPI,
 )
 

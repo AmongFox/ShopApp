@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UserSignupView, UserLoginView, UserLogoutView
+from .views import UserLoginView, UserLogoutView, UserSignupView
 
 app_name = "auth_app"
 

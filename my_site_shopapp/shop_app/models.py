@@ -1,6 +1,7 @@
 from django.db import models
-from auth_app.models import CustomUserModel
 from django_resized import ResizedImageField
+
+from auth_app.models import CustomUserModel
 
 
 def product_preview_directory_path(instance: "ProductModel", filename: str) -> str:

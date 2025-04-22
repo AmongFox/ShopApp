@@ -4,15 +4,22 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import FormView
 
-from .forms import UserSignupForm, UserLoginForm
+from .forms import UserLoginForm, UserSignupForm
 
 
 class UserSignupView(FormView):
     """
-    Регистрация нового пользователя
-    form_class: Class - Модель заполнения данных в форме
-    template_name: String - Шаблон отрисовки HTML кода
-    success_url: String - Ссылка для перехода после регистрации
+    Регистрация нового пользователя.
+
+    :param form_class: Модель заполнения данных в форме.
+    :type form_class: Class
+    :param template_name: Шаблон отрисовки HTML кода.
+    :type template_name: String
+    :param success_url: Ссылка для перехода после регистрации.
+    :type success_url: String
+
+    :return: Редирект на страницу профиля пользователя после успешной регистрации.
+    :rtype: HttpResponseRedirect
     """
 
     form_class = UserSignupForm
@@ -27,6 +34,18 @@ class UserSignupView(FormView):
 
 
 class UserLoginView(FormView):
+    """
+    Авторизация пользователя.
+
+    :param form_class: Модель заполнения данных в форме.
+    :type form_class: Class
+    :param template_name: Шаблон отрисовки HTML кода.
+    :type template_name: String
+
+    :return: Редирект на страницу профиля пользователя после успешной авторизации.
+    :rtype: HttpResponseRedirect
+    """
+
     form_class = UserLoginForm
     template_name = "login.html"
 
@@ -46,6 +65,13 @@ class UserLoginView(FormView):
 
 
 class UserLogoutView(FormView):
+    """
+    Выход пользователя из системы.
+
+    :return: Редирект на страницу авторизации.
+    :rtype: HttpResponseRedirect
+    """
+
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect(reverse("auth_app:login"))

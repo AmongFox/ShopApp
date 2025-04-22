@@ -1,3 +1,4 @@
+import json
 import os
 
 from django.conf import settings
@@ -7,7 +8,6 @@ from django.core.files import File
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
-import json
 
 from .models import ProductModel
 

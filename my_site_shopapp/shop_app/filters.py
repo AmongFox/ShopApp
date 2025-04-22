@@ -1,5 +1,5 @@
-import django_filters
 from django import forms
+import django_filters
 
 from .models import ProductModel
 

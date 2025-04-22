@@ -1,10 +1,11 @@
 from django import forms
-import phonenumbers
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
+import phonenumbers
+
+from profiles_app.models import UserProfileModel
 
 from .models import CustomUserModel
-from profiles_app.models import UserProfileModel
 
 
 class UserSignupForm(forms.ModelForm):

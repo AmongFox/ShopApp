@@ -1,16 +1,16 @@
 from django.urls import path
 
 from .views import (
-    ShopMainPageView,
-    ProductDetailView,
-    ProductListView,
+    CartProductListView,
+    CheckoutView,
+    FavoriteProductListView,
     MyProductView,
     ProductCreateView,
-    ProductUpdateView,
     ProductDeleteView,
-    CartProductListView,
-    FavoriteProductListView,
-    CheckoutView,
+    ProductDetailView,
+    ProductListView,
+    ProductUpdateView,
+    ShopMainPageView,
 )
 
 app_name = "shop_app"
