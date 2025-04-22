@@ -9,42 +9,44 @@ class ProductFilter(django_filters.FilterSet):
         label=False,
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'Поиск',
-                'autocomplete': 'off',
-                'class': 'search-input',
-            }),
-        lookup_expr='icontains',
-        field_name='name',
+                "placeholder": "Поиск",
+                "autocomplete": "off",
+                "class": "search-input",
+            }
+        ),
+        lookup_expr="icontains",
+        field_name="name",
     )
 
     price = django_filters.RangeFilter(
-        label='Цена',
+        label="Цена",
         widget=django_filters.widgets.RangeWidget(
             attrs={
-                'placeholder': '...',
-            }),
-        field_name='price',
+                "placeholder": "...",
+            }
+        ),
+        field_name="price",
     )
 
     archived = django_filters.BooleanFilter(
-        label='Архивированные',
+        label="Архивированные",
         widget=forms.CheckboxInput(),
-        field_name='archived',
+        field_name="archived",
     )
     in_stock = django_filters.BooleanFilter(
-        label='В наличии',
+        label="В наличии",
         widget=forms.CheckboxInput(),
-        field_name='in_stock',
-        method='filter_in_stock',
+        field_name="in_stock",
+        method="filter_in_stock",
     )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.filters['in_stock'].extra['initial'] = True
+        self.filters["in_stock"].extra["initial"] = True
 
     class Meta:
         model = ProductModel
-        fields = ['name', 'price', 'archived']
+        fields = ["name", "price", "archived"]
 
     def filter_in_stock(self, queryset, name, value):
         if value:

@@ -7,8 +7,8 @@ from .models import UserProfileModel
 
 class UserProfileAdmin(admin.ModelAdmin):
     model = UserProfileModel
-    list_display = ('user', 'name', 'surname')
-    search_fields = ('user__username',)
+    list_display = ("user", "name", "surname")
+    search_fields = ("user__username",)
 
 
 admin.site.register(UserProfileModel, UserProfileAdmin)

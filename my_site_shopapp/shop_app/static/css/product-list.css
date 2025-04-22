@@ -7,7 +7,7 @@
   --dark-color: #212529;
   --gray-color: #6c757d;
   --border-radius: 8px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   --transition: all 0.3s ease;
 }
 
@@ -30,7 +30,7 @@ body {
 /* Шапка сайта - как на главной */
 header {
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -60,7 +60,7 @@ header {
 
 .for-users a:hover {
   color: var(--primary-color);
-  background-color: rgba(67, 97, 238, 0.1);
+  background-color: rgb(67 97 238 / 10%);
 }
 
 .number-phone {
@@ -86,7 +86,7 @@ header {
 .home-button:hover {
     background-color: #2a0a8a;
     transform: translateY(-2px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
 }
 
 .home-button:active {
@@ -246,7 +246,7 @@ header {
 }
 
 .filter-buttons > div:hover {
-  background-color: rgba(247, 37, 133, 0.1);
+  background-color: rgb(247 37 133 / 10%);
 }
 
 .filter-range-price {
@@ -285,7 +285,7 @@ main {
 
 .product:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 15%);
 }
 
 .product-image {
@@ -379,7 +379,7 @@ footer {
 }
 
 /* Адаптивность */
-@media (max-width: 992px) {
+@media (width <= 992px) {
   .container {
     flex-direction: column;
   }
@@ -395,7 +395,7 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .menu {
     display: block;
     text-align: center;
@@ -420,7 +420,7 @@ footer {
   }
 }
 
-@media (max-width: 576px) {
+@media (width <= 576px) {
   main {
     grid-template-columns: 1fr;
   }

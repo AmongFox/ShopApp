@@ -10,8 +10,8 @@
   --danger-color: #e63946;
   --border-radius: 8px;
   --transition: all 0.3s ease;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --shadow: 0 2px 10px rgb(0 0 0 / 10%);
+  --shadow-hover: 0 5px 15px rgb(0 0 0 / 20%);
 }
 
 /* Общие стили */
@@ -134,7 +134,7 @@ main {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: var(--transition);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
     width: 100%;
 }
 
@@ -146,7 +146,7 @@ main {
 
 .checkout-button:active {
     transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .checkout-button:disabled {
@@ -178,7 +178,7 @@ main {
     vertical-align: middle;
 }
 
-.product-selector label:before {
+.product-selector label::before {
     content: "";
     position: absolute;
     left: 0;
@@ -191,16 +191,16 @@ main {
     transition: all 0.3s ease;
 }
 
-.product-selector label:hover:before {
+.product-selector label:hover::before {
     border-color: #3a56d4;
 }
 
-.product-selector input[type="checkbox"]:checked + label:before {
+.product-selector input[type="checkbox"]:checked + label::before {
     background-color: #4361ee;
     border-color: #4361ee;
 }
 
-.product-selector label:after {
+.product-selector label::after {
     content: "";
     position: absolute;
     left: 7px;
@@ -214,7 +214,7 @@ main {
     transition: all 0.3s ease;
 }
 
-.product-selector input[type="checkbox"]:checked + label:after {
+.product-selector input[type="checkbox"]:checked + label::after {
     opacity: 1;
 }
 

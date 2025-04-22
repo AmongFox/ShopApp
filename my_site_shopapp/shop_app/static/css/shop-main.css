@@ -9,7 +9,7 @@
   --dark-color: #212529;
   --gray-color: #6c757d;
   --border-radius: 8px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   --transition: all 0.3s ease;
   --catalog-height: 180px; /* Новая переменная для высоты каталога */
   --catalog-width: 280px;  /* Новая переменная для ширины каталога */
@@ -32,7 +32,7 @@ body {
 /* Шапка сайта - улучшенные стили */
 header {
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -65,7 +65,7 @@ header {
 
 .for-users a:hover {
   color: var(--primary-color);
-  background-color: rgba(67, 97, 238, 0.1);
+  background-color: rgb(67 97 238 / 10%);
 }
 
 .number-phone {
@@ -95,7 +95,7 @@ header {
 .home-button:hover {
     background-color: #2a0a8a;
     transform: translateY(-2px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
 }
 
 .home-button:active {
@@ -284,37 +284,37 @@ header {
 }
 
 .block-catalog-sale {
-  background: linear-gradient(rgba(255, 245, 143, 20%), rgba(255, 245, 143, 20%)),
+  background: linear-gradient(rgb(255 245 143 / 20%), rgb(255 245 143 / 20%)),
               url('../img/bc-catalog-sale.png') center/cover;
 }
 
 .block-catalog-gifts {
-  background: linear-gradient(rgba(243, 199, 235, 20%), rgba(215, 75, 190, 20%)),
+  background: linear-gradient(rgb(243 199 235 / 20%), rgb(215 75 190 / 20%)),
               url('../img/bc-catalog-gifts.png') center/cover;
 }
 
 .block-catalog-service {
-    background: linear-gradient(rgba(109, 121, 195, 20%), rgba(0, 0, 0, 20%)),
+    background: linear-gradient(rgb(109 121 195 / 20%), rgb(0 0 0 / 20%)),
               url('../img/bc-catalog-service.png') center/cover;
 }
 
 .block-catalog-business {
-  background: linear-gradient(rgba(207, 184, 124, 20%), rgba(225, 149, 30, 20%)),
+  background: linear-gradient(rgb(207 184 124 / 20%), rgb(225 149 30 / 20%)),
               url('../img/bc-catalog-business.png') center/cover;
 }
 
 .block-catalog-new {
-  background: linear-gradient(rgba(161, 57, 57, 20%), rgba(207, 192, 74, 20%)),
+  background: linear-gradient(rgb(161 57 57 / 20%), rgb(207 192 74 / 20%)),
               url('../img/bc-catalog-new.png') center/cover;
 }
 
 .block-catalog-bestsellers {
-  background: linear-gradient(rgba(0, 0, 0, 20%), rgba(0, 0, 0, 20%)),
+  background: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)),
           url('../img/bc-catalog-bestsellers.png') center/cover;
 }
 
 .block-catalog-clearance {
-  background: linear-gradient(rgba(0, 0, 0, 20%), rgba(0, 0, 0, 20%)),
+  background: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)),
               url('../img/bc-catalog-clearance.png') center/cover;
 }
 
@@ -326,43 +326,43 @@ header {
 .block-catalog-bestsellers:hover,
 .block-catalog-clearance:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
 }
 
 
 
 .block-catalog-sale:hover {
-    background: linear-gradient(rgba(255, 245, 143, 30%), rgba(255, 245, 143, 30%)),
+    background: linear-gradient(rgb(255 245 143 / 30%), rgb(255 245 143 / 30%)),
               url('../img/bc-catalog-sale-hover.png') center/cover;
 }
 
 .block-catalog-gifts:hover {
-    background: linear-gradient(rgba(243, 199, 235, 30%), rgba(215, 75, 190, 30%)),
+    background: linear-gradient(rgb(243 199 235 / 30%), rgb(215 75 190 / 30%)),
               url('../img/bc-catalog-gifts-hover.png') center/cover;
 }
 
 .block-catalog-service:hover {
-    background: linear-gradient(rgba(109, 121, 195, 30%), rgba(0, 0, 0, 30%)),
+    background: linear-gradient(rgb(109 121 195 / 30%), rgb(0 0 0 / 30%)),
               url('../img/bc-catalog-service-hover.png') center/cover;
 }
 
 .block-catalog-business:hover {
-  background: linear-gradient(rgba(207, 184, 124, 30%), rgba(225, 149, 30, 30%)),
+  background: linear-gradient(rgb(207 184 124 / 30%), rgb(225 149 30 / 30%)),
               url('../img/bc-catalog-business-hover.png') center/cover;
 }
 
 .block-catalog-new:hover {
-  background: linear-gradient(rgba(161, 57, 57, 30%), rgba(207, 192, 74, 30%)),
+  background: linear-gradient(rgb(161 57 57 / 30%), rgb(207 192 74 / 30%)),
               url('../img/bc-catalog-new-hover.png') center/cover;
 }
 
 .block-catalog-bestsellers:hover {
-  background: linear-gradient(rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)),
+  background: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 30%)),
           url('../img/bc-catalog-bestsellers-hover.png') center/cover;
 }
 
 .block-catalog-clearance:hover {
-  background: linear-gradient(rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)),
+  background: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 30%)),
               url('../img/bc-catalog-clearance-hover.png') center/cover;
 }
 
@@ -408,7 +408,7 @@ main {
 
 .product:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 15%);
 }
 
 .product-image {
@@ -501,7 +501,7 @@ main {
 .remove-to-cart-btn:hover {
   background-color: #d91a6d;
   transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
 }
 
 .remove-to-cart-btn i {
@@ -523,14 +523,14 @@ footer p {
 }
 
 /* Адаптивность - улучшенные медиа-запросы */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   :root {
     --catalog-width: 240px;
     --catalog-height: 160px;
   }
 }
 
-@media (max-width: 992px) {
+@media (width <= 992px) {
   .navbar {
     flex-wrap: wrap;
     gap: 15px;
@@ -550,7 +550,7 @@ footer p {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .menu {
     display: block;
     text-align: center;
@@ -575,7 +575,7 @@ footer p {
   }
 
   .table-menu li:hover {
-    background-color: rgba(67, 97, 238, 0.1);
+    background-color: rgb(67 97 238 / 10%);
   }
 
   .for-users {
@@ -596,7 +596,7 @@ footer p {
   }
 }
 
-@media (max-width: 576px) {
+@media (width <= 576px) {
   :root {
     --catalog-width: 180px;
     --catalog-height: 120px;

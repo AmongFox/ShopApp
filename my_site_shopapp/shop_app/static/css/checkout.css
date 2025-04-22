@@ -44,7 +44,7 @@ h1 {
 .order-summary {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     padding: 25px;
     height: fit-content;
     max-height: 80vh;
@@ -111,7 +111,7 @@ h1 {
 form {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
     padding: 25px;
     height: fit-content;
     max-height: 80vh;
@@ -162,7 +162,7 @@ form input[type="tel"]:focus,
 form textarea:focus {
     border-color: #3498db;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 0 2px rgb(52 152 219 / 20%);
 }
 
 button[type="submit"] {
@@ -186,7 +186,7 @@ button[type="submit"]:hover {
 }
 
 /* Адаптивность */
-@media (max-width: 992px) {
+@media (width <= 992px) {
     .checkout-container {
         grid-template-columns: 1fr;
         min-height: auto;
@@ -198,7 +198,7 @@ button[type="submit"]:hover {
     }
 }
 
-@media (max-width: 576px) {
+@media (width <= 576px) {
     .main-wrapper {
         padding: 15px;
     }

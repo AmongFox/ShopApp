@@ -9,8 +9,11 @@ def product_preview_directory_path(instance: "ProductModel", filename: str) -> s
 
 class ProductModel(models.Model):
     """Product"""
+
     name = models.CharField(max_length=60, db_index=True)
-    description = models.TextField(max_length=1000, null=False, blank=True, db_index=True)
+    description = models.TextField(
+        max_length=1000, null=False, blank=True, db_index=True
+    )
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     discount = models.PositiveSmallIntegerField(default=0)
     quantity = models.PositiveSmallIntegerField(default=0)
@@ -20,4 +23,4 @@ class ProductModel(models.Model):
     preview = ResizedImageField(null=False, upload_to=product_preview_directory_path)
 
     def __str__(self) -> str:
-        return f'{self.pk} Продукт — {self.name!r}'
+        return f"{self.pk} Продукт — {self.name!r}"

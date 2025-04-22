@@ -13,12 +13,14 @@ class UserProfileModel(models.Model):
     surname = models.CharField(max_length=30, null=True, blank=True)
     bio = models.TextField(max_length=200, blank=True)
 
-    user = models.OneToOneField(CustomUserModel, on_delete=models.CASCADE, related_name="user_profile")
+    user = models.OneToOneField(
+        CustomUserModel, on_delete=models.CASCADE, related_name="user_profile"
+    )
     avatar = ResizedImageField(
         null=True,
         blank=True,
         upload_to=profile_preview_directory_path,
-        default='profiles/profile_default/default.png',
+        default="profiles/profile_default/default.png",
     )
 
     def save(self, *args, **kwargs):

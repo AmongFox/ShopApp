@@ -37,10 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
     "django_filters",
-
     "auth_app.apps.AuthAppConfig",
     "profiles_app.apps.ProfilesAppConfig",
     "shop_app.apps.ShopAppConfig",
@@ -123,18 +121,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = path.join(BASE_DIR, 'css')
+STATIC_URL = "static/"
+STATIC_ROOT = path.join(BASE_DIR, "css")
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = path.join(BASE_DIR, 'media/')
+MEDIA_URL = "media/"
+MEDIA_ROOT = path.join(BASE_DIR, "media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "auth_app.CustomUserModel"
-LOGIN_URL = '/auth/login/'
+LOGIN_URL = "/auth/login/"
 
-DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'PNG'
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = "PNG"
 DJANGORESIZED_DEFAULT_SIZE = [500, 300]

@@ -7,7 +7,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import CartProduct, FavoriteProduct, OrderItem, Order, Cart, Favorite
-from .serializers import CartProductSerializer, FavoriteProductSerializer, OrderSerializer, ProductSerializer
+from .serializers import (
+    CartProductSerializer,
+    FavoriteProductSerializer,
+    OrderSerializer,
+    ProductSerializer,
+)
 from shop_app.models import ProductModel
 
 
@@ -25,12 +30,12 @@ class AddToCartAPIView(CreateAPIView):
 
         cart_product, created = CartProduct.objects.get_or_create(
             cart=self.get_cart(),
-            product=serializer.validated_data['product'],
-            defaults={'quantity': serializer.validated_data.get('quantity', 1)}
+            product=serializer.validated_data["product"],
+            defaults={"quantity": serializer.validated_data.get("quantity", 1)},
         )
 
         if not created:
-            cart_product.quantity += serializer.validated_data.get('quantity', 1)
+            cart_product.quantity += serializer.validated_data.get("quantity", 1)
             cart_product.save()
 
         output_serializer = CartProductSerializer(cart_product)
@@ -62,7 +67,7 @@ class AddToFavoriteAPIView(CreateAPIView):
 
         favorite_product, created = FavoriteProduct.objects.get_or_create(
             favorite=self.get_favorite(),
-            product=serializer.validated_data['product'],
+            product=serializer.validated_data["product"],
         )
 
         if not created:
@@ -90,19 +95,16 @@ class OrderCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         # Валидация базовых данных
-        items = request.data.get('items', [])
+        items = request.data.get("items", [])
 
         if not items:
             return Response(
-                {'error': 'Заказ должен содержать хотя бы один товар'},
-                status=status.HTTP_400_BAD_REQUEST
+                {"error": "Заказ должен содержать хотя бы один товар"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         # Создаем заказ
-        order = Order.objects.create(
-            user=request.user,
-            status='created'
-        )
+        order = Order.objects.create(user=request.user, status="created")
 
         total_price = 0
         order_items = []
@@ -110,14 +112,14 @@ class OrderCreateView(CreateAPIView):
         # Обрабатываем каждый товар в заказе
         for item in items:
             try:
-                product = ProductModel.objects.get(pk=item['product_id'])
-                quantity = int(item['quantity'])
+                product = ProductModel.objects.get(pk=item["product_id"])
+                quantity = int(item["quantity"])
 
                 if quantity < 1:
                     order.delete()
                     return Response(
-                        {'error': 'Количество товара должно быть не менее 1'},
-                        status=status.HTTP_400_BAD_REQUEST
+                        {"error": "Количество товара должно быть не менее 1"},
+                        status=status.HTTP_400_BAD_REQUEST,
                     )
 
                 price = product.price * quantity
@@ -125,24 +127,21 @@ class OrderCreateView(CreateAPIView):
 
                 order_items.append(
                     OrderItem(
-                        order=order,
-                        product=product,
-                        quantity=quantity,
-                        price=price
+                        order=order, product=product, quantity=quantity, price=price
                     )
                 )
 
             except (KeyError, ValueError):
                 order.delete()
                 return Response(
-                    {'error': 'Неверный формат данных товаров'},
-                    status=status.HTTP_400_BAD_REQUEST
+                    {"error": "Неверный формат данных товаров"},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
             except ProductModel.DoesNotExist:
                 order.delete()
                 return Response(
-                    {'error': f'Товар с ID {item["product_id"]} не найден'},
-                    status=status.HTTP_400_BAD_REQUEST
+                    {"error": f'Товар с ID {item["product_id"]} не найден'},
+                    status=status.HTTP_400_BAD_REQUEST,
                 )
 
         # Сохраняем все товары заказа
@@ -165,23 +164,24 @@ class OrderCreateView(CreateAPIView):
 class SelectedProductsAPI(APIView):
     def post(self, request):
         try:
-            selected_ids = request.data.get('selected_products', [])
+            selected_ids = request.data.get("selected_products", [])
 
             # Проверяем, что товары действительно существуют
             existing_products = ProductModel.objects.filter(id__in=selected_ids)
             existing_ids = [str(product.id) for product in existing_products]
 
             # Сохраняем только существующие товары
-            request.session['selected_products'] = existing_ids
+            request.session["selected_products"] = existing_ids
 
             serializer = ProductSerializer(existing_products, many=True)
-            return Response({
-                'products': serializer.data,
-                'total_price': sum(product.price for product in existing_products)
-            })
+            return Response(
+                {
+                    "products": serializer.data,
+                    "total_price": sum(product.price for product in existing_products),
+                }
+            )
 
         except Exception as e:
             return Response(
-                {'error': str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
