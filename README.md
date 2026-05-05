@@ -29,7 +29,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://gitlab.com/projects-afox-portfolio/django-shopapp-studentproject.git
+   git clone https://github.com/AmongFox/ShopApp.git
    cd .\my_site_shopapp\
    
 2. Создайте и активируйте виртуальное окружение:
