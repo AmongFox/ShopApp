@@ -1,0 +1,5 @@
+Django~=5.2.14
+phonenumbers~=9.0.29
+django-filter~=25.2
+djangorestframework~=3.17.1
+python-dotenv~=1.2.2
