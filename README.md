@@ -1,6 +1,5 @@
 # Интернет-магазин Django-ShopApp
 
-![Логотип](static/images/logo.png)  
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![Django](https://img.shields.io/badge/Django-5.1.4-brightgreen.svg)](https://djangoproject.com)
 
@@ -23,9 +22,6 @@
 - Django 5.1.4
 - Django REST Framework
 - SQLite
-
-**Инфраструктура:**
-- Docker
 
 ## 🚀 Установка
 
@@ -72,7 +68,6 @@
    │   ├── db.sqlite3
    │   ├── manage.py
    │   └── pyproject.toml     # Конфиг плагинов
-   ├── Dockerfile
    └── README.md
    ```
 ## 🌐 API Endpoints
@@ -85,7 +80,4 @@
 | `shop/orders/api/create/`                    | POST   | Создать заказ              |
 | `shop/checkout/api/selected-products/`       | POST   | Работа с товарами в сессии |
 
-## ✉️ Контакты
-[@AFoxq](https://t.me/AFoxq) - bourraska@gmail.com
-
-[Ссылка на проект](https://gitlab.com/projects-afox-portfolio/django-shopapp-studentproject)
+### Демонстрация сайта в папке assets
