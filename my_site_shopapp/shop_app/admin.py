@@ -20,17 +20,15 @@ class ProductAdmin(admin.ModelAdmin):
     ]
     list_display = (
         "name",
-        "description",
         "price",
         "discount",
         "quantity",
         "created_date",
         "created_by",
         "archived",
-        "preview",
     )
     list_filter = ("created_date", "created_by", "archived")
-    search_fields = ("name", "description", "created_by__username")
+    search_fields = ("name", "created_by__username")
     ordering = ("name", "price", "discount", "quantity", "created_date")
 
     fieldsets = (
